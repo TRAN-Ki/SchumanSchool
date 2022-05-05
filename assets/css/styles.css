@@ -11433,3 +11433,45 @@ section.resume-section .resume-section-content {
     padding-bottom: 5rem;
   }
 }
+.ed-card.with-epingle {
+  overflow-wrap: break-word;
+}
+.with-epingle {
+  position: relative;
+}
+
+.ed-card {
+  margin: 40px 0 0;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 0 3px rgb(0 0 0 / 30%);
+  border: 1px solid #f5f6f7;
+  border: 1px solid var(--light-placeholder-color);
+}
+.clickable, .cliquable {
+  cursor: pointer;
+}
+.screen-reader {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+button, html input[type=button], input[type=reset], input[type=submit] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+button, select {
+  text-transform: none;
+}

@@ -19,8 +19,9 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
             <a class="navbar-brand js-scroll-trigger" href="#page-top">
-                <span class="d-block d-lg-none">Clarence Taylor</span>
-                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="../assets/img/profile.jpg" alt="..." /></span>
+
+
+                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="../assets/img/default_avatar.png" alt="..." /></span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -29,7 +30,7 @@
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">Experience</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">Education</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Skills</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Interests</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#devoir">Devoir</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#awards">Awards</a></li>
                 </ul>
             </div>
@@ -39,14 +40,20 @@
             <!-- About-->
             <section class="resume-section" id="about">
                 <div class="resume-section-content">
-                    <h1 class="mb-0">
-                        Clarence
-                        <span class="text-primary">Taylor</span>
+                    <?php
+                    session_start();
+                    if (isset($_SESSION['id'])){
+                        echo "
+                    <h1 class='mb-0'>
+                        ".$_SESSION['prenom']." 
+                        <span class='text-primary'>".$_SESSION['nom']."</span>
                     </h1>
-                    <div class="subheading mb-5">
-                        3542 Berry Street · Cheyenne Wells, CO 80810 · (317) 585-8468 ·
-                        <a href="mailto:name@email.com">name@email.com</a>
-                    </div>
+
+                    <div class='subheading mb-5'>
+                        ".$_SESSION['cp']."·".$_SESSION['rue']."·".$_SESSION['ville']."·".$_SESSION['tel_etudiant']."·
+                        <a href='mailto:name@email.com'>".$_SESSION['email']."</a>
+                    </div>";
+                    }?>
                     <p class="lead mb-5">I am experienced in leveraging agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.</p>
                     <div class="social-icons">
                         <a class="social-icon" href="#!"><i class="fab fa-linkedin-in"></i></a>
@@ -162,11 +169,42 @@
             </section>
             <hr class="m-0" />
             <!-- Interests-->
-            <section class="resume-section" id="interests">
+            <?php
+            require_once "../src/bdd/Bdd.php";
+            $bdd = new Bdd();
+            $req = $bdd->connexion()->prepare('SELECT * FROM devoir');
+            $req->execute();
+            $res1 = $req->fetchall();
+            ?>
+            <section class="resume-section" id="devoir">
                 <div class="resume-section-content">
-                    <h2 class="mb-5">Interests</h2>
-                    <p>Apart from being a web developer, I enjoy most of my time being outdoors. In the winter, I am an avid skier and novice ice climber. During the warmer months here in Colorado, I enjoy mountain biking, free climbing, and kayaking.</p>
-                    <p class="mb-0">When forced indoors, I follow a number of sci-fi and fantasy genre movies and television shows, I am an aspiring chef, and I spend a large amount of my free time exploring the latest technology advancements in the front-end web development world.</p>
+                    <h2 class="mb-5">Devoir</h2>
+                    <div class="ed-card with-epingle cliquable devoiravenir boite-devoirs ng-star-inserted">
+                        <h3 class="date">lundi 9 mai</h3>
+
+                        <div><p class="ng-star-inserted">
+                                <span class="subject"> FRANCAIS <!----></span>
+                                <span  class="pull-right ng-star-inserted">Donné le vendredi 22 avril</span><!----></p><!---->
+                        </div>
+                    </div>
+                    <?php
+                    foreach ($res1 as $val){
+                        $date=date_create($val["date_debut"]);
+                        $date1=date_create($val["date_fin"]);
+                        setlocale(LC_TIME, "fr_FR", "French");
+                        echo ' 
+                                <div class="ed-card with-epingle cliquable devoiravenir boite-devoirs ng-star-inserted">
+                        <h3 class="date">'.strftime("%A %d %B %G", strtotime(DATE_FORMAT($date1 , "l F Y" ))).'</h3>
+
+                        <div><p class="ng-star-inserted">
+                                <span class="subject"> '.$val["libelle"].' <!----></span>
+                                 
+                                <span  class="pull-right ng-star-inserted">Donné le '.strftime("%A %d %B %G", strtotime(DATE_FORMAT($date , "l F Y" ))).'</span><!----></p><!---->
+                        </div>
+                    </div>
+                            ';
+                    }
+                    ?>
                 </div>
             </section>
             <hr class="m-0" />
