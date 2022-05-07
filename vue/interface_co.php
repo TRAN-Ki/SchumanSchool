@@ -172,7 +172,7 @@
             <?php
             require_once "../src/bdd/Bdd.php";
             $bdd = new Bdd();
-            $req = $bdd->connexion()->prepare('SELECT * FROM devoir');
+            $req = $bdd->connexion()->prepare('SELECT * FROM devoir INNER JOIN etudiant ON devoir.ref_classe = etudiant.ref_classe WHERE etudiant.id_etudiant='.$_SESSION["id"].' ');
             $req->execute();
             $res1 = $req->fetchall();
             ?>

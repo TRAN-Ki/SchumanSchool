@@ -77,11 +77,12 @@ class Etudiant
             $_SESSION['nom'] = $res['nom'];
             $_SESSION['prenom'] = $res['prenom'];
             $_SESSION['email'] = $res['email'];
-            $_SESSION['id'] = $res['id_etudiant'];
+            $_SESSION['id_etudiant'] = $res['id_etudiant'];
             $_SESSION['rue'] = $res['rue'];
             $_SESSION['cp'] = $res['cp'];
             $_SESSION['ville'] = $res['ville'];
             $_SESSION['tel_etudiant'] = $res['tel_etudiant'];
+            $_SESSION['ref_classe'] = $res['ref_classe'];
 
 
             header('Location: ../../vue/etudiant_vue.php');
