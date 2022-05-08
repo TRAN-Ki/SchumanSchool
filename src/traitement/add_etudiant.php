@@ -1,5 +1,5 @@
 <?php
-require_once "../modele/Direction.php";
+require_once "../modele/Etudiant.php";
 require_once "../bdd/Bdd.php";
 $database = new Bdd();
 $insert = new Etudiant(array(
@@ -15,4 +15,4 @@ $insert = new Etudiant(array(
     'RefClasse' => $_POST['ref_classe'],
 ));
 $insert->addEtudiant($database);
-header('Location: ../../vue/direction_vue.php');
+header('Location: ../../vue/interface_direction.php');

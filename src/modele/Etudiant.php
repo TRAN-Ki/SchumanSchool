@@ -45,7 +45,13 @@ class Etudiant
             'ref_classe'=>$this->getRefClasse()
         ));
     }
+    public function deleteEtudiant($bdd){
+        $req=$bdd->connexion()->prepare('DElETE FROM etudiant WHERE id_etudiant=:id_etudiant ');
+        $req->execute(array(
+            'id_etudiant'=>$this->getIdEtudiant()
+        ));
 
+    }
     public function modifEtudiant($bdd){
         $req = $bdd->connexion()->prepare("UPDATE etudiant SET `nom`=:nom,prenom=:prenom,`mot_de_passe`=:mot_de_passe,`email`=:email,`rue`=:rue,`cp`=:cp,`ville`=:ville,`tel_etudiant`=:tel_etudiant,`tel_resp_legal`=:tel_resp_legal,`ref_classe`=:ref_classe WHERE id_etudiant = :id_etudiant");
         $req->execute(array(

@@ -188,6 +188,7 @@
                     <th>Adresse</th>
                     <th>Telephone</th>
                     <th>Classe</th>
+                    <th>Supprimer</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -209,6 +210,12 @@
                                             <td>rue ,".$val['rue']." ".$val['cp']." ".$val['ville']."</td>
                                             <td>".$val['tel_etudiant']."</td>
                                             <td>".$val['ref_classe']."</td>
+                                            <td>
+                                                <form action='../src/traitement/delete_eleve.php' method='post'>
+                                                    <input alt='Bouton supprimer' type='image' src='../assets/img/delete_logo.png' height='20'>
+                                                    <input hidden type='text' name='id_etudiant' value='" . $val['id_etudiant'] . "'>
+                                                </form>
+                                            </td>
                                         </tr>
                                     ";
                     }
@@ -217,6 +224,65 @@
                 </tbody>
             </table>
     </section>
+    <div class="resume-section-content">
+        <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+            <div class="col-lg-6">
+                <form action="../src/traitement/add_etudiant.php" method="post">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="nom" type="text" placeholder="nom" required data-sb-validations="required" name="nom" />
+                        <label for="nom">nom</label>
+                        <div class="invalid-feedback" data-sb-feedback="nom:required">Un nom est demander</div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="prenom" type="text" placeholder="prenom" required data-sb-validations="required" name="prenom" />
+                        <label for="prenom">prenom</label>
+                        <div class="invalid-feedback" data-sb-feedback="prenom:required">Un prenom est demander</div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="email" type="email" placeholder="email" required data-sb-validations="required" name="email" />
+                        <label for="email">email</label>
+                        <div class="invalid-feedback" data-sb-feedback="email:required">Un email est demander</div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="mot_de_passe" type="text" placeholder="mot_de_passe" required data-sb-validations="required" name="mot_de_passe" />
+                        <label for="mot_de_passe">Mot de passe</label>
+                        <div class="invalid-feedback" data-sb-feedback="mot_de_passe:required">Un mot de passe est demander</div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="rue" type="text" placeholder="rue" required data-sb-validations="required" name="rue" />
+                        <label for="rue">rue</label>
+                        <div class="invalid-feedback" data-sb-feedback="rue:required">Une rue est demander</div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="ville" type="text" placeholder="ville" required data-sb-validations="required" name="ville" />
+                        <label for="ville">ville</label>
+                        <div class="invalid-feedback" data-sb-feedback="ville:required">Une ville est demander</div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="cp" type="number" placeholder="cp" required data-sb-validations="required" name="cp" />
+                        <label for="cp">cp</label>
+                        <div class="invalid-feedback" data-sb-feedback="cp:required">Un cp est demander</div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="tel_etudiant" type="number" placeholder="tel_etudiant" required data-sb-validations="required" name="tel_etudiant" />
+                        <label for="tel_etudiant">TelEtudiant</label>
+                        <div class="invalid-feedback" data-sb-feedback="tel_etudiant:required">Un numero de telephone est demander</div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="tel_resp_legal" type="number" placeholder="tel_resp_legal" required data-sb-validations="required" name="tel_resp_legal" />
+                        <label for="tel_resp_legal">TelRespLegal</label>
+                        <div class="invalid-feedback" data-sb-feedback="tel_resp_legal:required">Un numero de telephone est demander</div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="ref_classe" type="number" placeholder="ref_classe" required data-sb-validations="required" name="ref_classe" />
+                        <label for="ref_classe">Classe</label>
+                        <div class="invalid-feedback" data-sb-feedback="ref_classe:required">Une classe est demander</div>
+                    </div>
+                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                    <div class="d-grid"><button class="btn btn-primary btn-xl " id="submitButton" type="submit">Ajouter un professeur</button></div>
+                </form>
+            </div>
+        </div>
 
 
 

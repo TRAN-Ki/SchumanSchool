@@ -7,4 +7,4 @@ $insert = new Professeur(array(
     "IdProfesseur"=>$_POST['id_professeur'],
 ));
 $insert->deleteProfesseur($database);
-
+header('Location: ../../vue/interface_direction.php');

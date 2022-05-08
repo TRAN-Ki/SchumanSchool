@@ -8,4 +8,4 @@ $insert = new Direction(array(
     'MotDePasse'=>$_POST['mot_de_passe']
 ));
 $insert->testDirection($database);
-header('Location: ../../vue/interface_co.php');
+header('Location: ../../vue/interface_direction.php');
