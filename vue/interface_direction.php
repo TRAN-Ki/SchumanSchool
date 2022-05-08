@@ -32,9 +32,9 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav">
             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
-            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">Experience</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#professeur">Professeur</a></li>
             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">Education</a></li>
-            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Classe</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#classe">Classe</a></li>
             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#devoir">Devoir</a></li>
             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#awards">Awards</a></li>
         </ul>
@@ -70,70 +70,106 @@
     </section>
     <hr class="m-0" />
     <!-- Experience-->
-    <section class="resume-section" id="experience">
+    <section class="resume-section" id="professeur">
         <div class="resume-section-content">
-            <h2 class="mb-5">Experience</h2>
-            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0">Senior Web Developer</h3>
-                    <div class="subheading mb-3">Intelitec Solutions</div>
-                    <p>Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.</p>
-                </div>
-                <div class="flex-shrink-0"><span class="text-primary">March 2013 - Present</span></div>
-            </div>
-            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0">Web Developer</h3>
-                    <div class="subheading mb-3">Intelitec Solutions</div>
-                    <p>Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.</p>
-                </div>
-                <div class="flex-shrink-0"><span class="text-primary">December 2011 - March 2013</span></div>
-            </div>
-            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0">Junior Web Designer</h3>
-                    <div class="subheading mb-3">Shout! Media Productions</div>
-                    <p>Podcasting operational change management inside of workflows to establish a framework. Taking seamless key performance indicators offline to maximise the long tail. Keeping your eye on the ball while performing a deep dive on the start-up mentality to derive convergence on cross-platform integration.</p>
-                </div>
-                <div class="flex-shrink-0"><span class="text-primary">July 2010 - December 2011</span></div>
-            </div>
-            <div class="d-flex flex-column flex-md-row justify-content-between">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0">Web Design Intern</h3>
-                    <div class="subheading mb-3">Shout! Media Productions</div>
-                    <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.</p>
-                </div>
-                <div class="flex-shrink-0"><span class="text-primary">September 2008 - June 2010</span></div>
-            </div>
-        </div>
+            <?php
+            require_once "../src/bdd/Bdd.php";
+            $database = new Bdd();
+            $req = $database->connexion()->prepare('SELECT * FROM professeur;');
+            $req->execute();
+            $res = $req->fetchAll();
+            ?>
+            <h2 class="mb-5">Professeur</h2>
+            <table id="table_id" class="table table-bordered display">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Email</th>
+                    <th>Telephone</th>
+                    <td>Modifier professeur</td>
+                    <td>Supprimer professeur</td>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                if (!(isset($res['0']['id_professeur']))){
+                    echo "<tr>
+                                        <td colspan='9' style='text-align: center'>Aucun etudiant</td>
+                                    </tr>
+                                ";
+                }
+                else {
+                    foreach ($res as $val) {
+
+
+                        echo "<tr style='text-align: center'>
+                                            <td>".$val['nom']."</td>
+                                            <td>".$val['prenom']."</td>
+                                            <td>".$val['email']."</td>
+                                            <td>".$val['tel_portable']."</td>
+                                            <td>
+                                            <form action='modif_professeur.php' method='post'>
+                                                    <input alt='Bouton modifier' type='image' src='../assets/img/update_logo.png' height='20'>
+                                                    <input hidden type='text' name='id_professeur' value='".$val['id_professeur']."'>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form action='../src/traitement/delete_professeur.php' method='post'>
+                                                    <input alt='Bouton supprimer' type='image' src='../assets/img/delete_logo.png' height='20'>
+                                                    <input hidden type='text' name='id_professeur' value='" . $val['id_professeur'] . "'>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    ";
+                    }
+                }
+                ?>
+                </tbody>
+            </table>
     </section>
     <hr class="m-0" />
     <!-- Education-->
     <section class="resume-section" id="education">
         <div class="resume-section-content">
-            <h2 class="mb-5">Education</h2>
-            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0">University of Colorado Boulder</h3>
-                    <div class="subheading mb-3">Bachelor of Science</div>
-                    <div>Computer Science - Web Development Track</div>
-                    <p>GPA: 3.23</p>
+            <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+                <div class="col-lg-6">
+                    <form action="../src/traitement/add_professeur.php" method="post">
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="nom" type="text" placeholder="nom" required data-sb-validations="required" name="nom" />
+                            <label for="nom">nom</label>
+                            <div class="invalid-feedback" data-sb-feedback="nom:required">Un nom est demander</div>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="prenom" type="text" placeholder="prenom" required data-sb-validations="required" name="prenom" />
+                            <label for="prenom">prenom</label>
+                            <div class="invalid-feedback" data-sb-feedback="prenom:required">Un prenom est demander</div>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="email" type="email" placeholder="email" required data-sb-validations="required" name="email" />
+                            <label for="email">email</label>
+                            <div class="invalid-feedback" data-sb-feedback="email:required">Un email est demander</div>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="mot_de_passe" type="text" placeholder="mot_de_passe" required data-sb-validations="required" name="mot_de_passe" />
+                            <label for="mot_de_passe">Mot de passe</label>
+                            <div class="invalid-feedback" data-sb-feedback="mot_de_passe:required">Un mot de passe est demander</div>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="tel_portable" type="number" placeholder="tel_portable" required data-sb-validations="required" name="tel_portable" />
+                            <label for="tel_portable">telephone</label>
+                            <div class="invalid-feedback" data-sb-feedback="tel_portable:required">Un numero de telephone est demander</div>
+                        </div>
+                        <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                        <div class="d-grid"><button class="btn btn-primary btn-xl " id="submitButton" type="submit">Ajouter un professeur</button></div>
+                    </form>
                 </div>
-                <div class="flex-shrink-0"><span class="text-primary">August 2006 - May 2010</span></div>
-            </div>
-            <div class="d-flex flex-column flex-md-row justify-content-between">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0">James Buchanan High School</h3>
-                    <div class="subheading mb-3">Technology Magnet Program</div>
-                    <p>GPA: 3.56</p>
-                </div>
-                <div class="flex-shrink-0"><span class="text-primary">August 2002 - May 2006</span></div>
             </div>
         </div>
     </section>
     <hr class="m-0" />
     <!-- Skills-->
-    <section class="resume-section" id="skills">
+    <section class="resume-section" id="classe">
         <div class="resume-section-content">
             <?php
             require_once "../src/bdd/Bdd.php";
@@ -181,94 +217,9 @@
                 </tbody>
             </table>
     </section>
-    <hr class="m-0" />
-    <!-- Interests-->
-    <?php
-    require_once "../src/bdd/Bdd.php";
-    $bdd = new Bdd();
-    $req = $bdd->connexion()->prepare('SELECT * FROM devoir INNER JOIN etudiant ON devoir.ref_classe = etudiant.ref_classe WHERE etudiant.id_etudiant='.$_SESSION["id"].' ');
-    $req->execute();
-    $res1 = $req->fetchall();
-    ?>
-    <section class="resume-section" id="devoir">
-        <div class="resume-section-content">
-            <h2 class="mb-5">Devoir</h2>
-            <div class="ed-card with-epingle cliquable devoiravenir boite-devoirs ng-star-inserted">
-                <h3 class="date">lundi 9 mai</h3>
 
-                <div><p class="ng-star-inserted">
-                        <span class="subject"> FRANCAIS <!----></span>
-                        <span  class="pull-right ng-star-inserted">Donné le vendredi 22 avril</span><!----></p><!---->
-                </div>
-            </div>
-            <?php
-            foreach ($res1 as $val){
-                $date=date_create($val["date_debut"]);
-                $date1=date_create($val["date_fin"]);
-                setlocale(LC_TIME, "fr_FR", "French");
-                echo ' 
-                                <div class="ed-card with-epingle cliquable devoiravenir boite-devoirs ng-star-inserted">
-                        <h3 class="date">'.strftime("%A %d %B %G", strtotime(DATE_FORMAT($date1 , "l F Y" ))).'</h3>
 
-                        <div><p class="ng-star-inserted">
-                                <span class="subject"> '.$val["libelle"].' <!----></span>
-                                 
-                                <span  class="pull-right ng-star-inserted">Donné le '.strftime("%A %d %B %G", strtotime(DATE_FORMAT($date , "l F Y" ))).'</span><!----></p><!---->
-                        </div>
-                    </div>
-                            ';
-            }
-            ?>
-        </div>
-    </section>
-    <hr class="m-0" />
-    <!-- Awards-->
-    <section class="resume-section" id="awards">
-        <div class="resume-section-content">
-            <h2 class="mb-5">Awards & Certifications</h2>
-            <ul class="fa-ul mb-0">
-                <li>
-                    <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
-                    Google Analytics Certified Developer
-                </li>
-                <li>
-                    <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
-                    Mobile Web Specialist - Google Certification
-                </li>
-                <li>
-                    <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
-                    1
-                    <sup>st</sup>
-                    Place - University of Colorado Boulder - Emerging Tech Competition 2009
-                </li>
-                <li>
-                    <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
-                    1
-                    <sup>st</sup>
-                    Place - University of Colorado Boulder - Adobe Creative Jam 2008 (UI Design Category)
-                </li>
-                <li>
-                    <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
-                    2
-                    <sup>nd</sup>
-                    Place - University of Colorado Boulder - Emerging Tech Competition 2008
-                </li>
-                <li>
-                    <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
-                    1
-                    <sup>st</sup>
-                    Place - James Buchanan High School - Hackathon 2006
-                </li>
-                <li>
-                    <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
-                    3
-                    <sup>rd</sup>
-                    Place - James Buchanan High School - Hackathon 2005
-                </li>
-            </ul>
-        </div>
-    </section>
-</div>
+
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->

@@ -47,7 +47,13 @@ class Professeur
             'tel_portable'=>$this->getTelPortable()
         ));
     }
+    public function deleteProfesseur($bdd){
+        $req=$bdd->connexion()->prepare('DElETE FROM professeur WHERE id_professeur=:id_professeur ');
+        $req->execute(array(
+            'id_professeur'=>$this->getIdProfesseur()
+        ));
 
+    }
     public function testProfesseur($bdd){
         session_start();
         $req = $bdd->connexion()->prepare('SELECT * FROM professeur WHERE email = :email AND mot_de_passe = :mot_de_passe');
