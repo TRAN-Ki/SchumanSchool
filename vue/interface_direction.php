@@ -35,8 +35,6 @@
             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#professeur">Professeur</a></li>
             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">Education</a></li>
             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#classe">Classe</a></li>
-            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#devoir">Devoir</a></li>
-            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#awards">Awards</a></li>
         </ul>
     </div>
 </nav>

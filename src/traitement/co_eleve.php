@@ -9,5 +9,5 @@ $insert = new Etudiant(array(
 ));
 $insert->testEtudiant($database);
 
-header('Location: ../../vue/interface_co.php');
+
 

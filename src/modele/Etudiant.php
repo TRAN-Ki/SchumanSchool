@@ -91,7 +91,7 @@ class Etudiant
             $_SESSION['ref_classe'] = $res['ref_classe'];
 
 
-            header('Location: ../../vue/etudiant_vue.php');
+            header('Location: ../../vue/interface_co.php');
         }
         else{
             header('Location: ../../vue/login_eleve.php');
