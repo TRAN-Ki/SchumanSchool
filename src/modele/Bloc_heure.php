@@ -73,6 +73,18 @@ class Bloc_heure
         ));
     }
 
+    public function addBlocHeure($bdd){
+        $req=$bdd->connexion()->prepare('INSERT INTO bloc_heure (jour, heure_debut, heure_fin, ref_professeur, ref_classe, ref_matiere) VALUES (:jour, :heure_debut, :heure_fin, :ref_professeur, :ref_classe, :ref_matiere)');
+        $req->execute(array(
+            'jour'=>$this->getJour(),
+            'heure_debut'=>$this->getHeureDebut(),
+            'heure_fin'=>$this->getHeureFin(),
+            'ref_professeur'=>$this->getRefProfesseur(),
+            'ref_classe'=>$this->getRefClasse(),
+            'ref_matiere'=>$this->getRefMatiere()
+        ));
+    }
+
     /**
      * @return mixed
      */
