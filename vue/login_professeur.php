@@ -1,4 +1,15 @@
 <!DOCTYPE html>
+<?php
+session_start();
+if (isset($_SESSION['id_etudiant'])) {
+    header('location: interface_co.php');
+}
+if (isset($_SESSION['id_direction'])) {
+    header('location: interface_direction.php');
+}
+if (isset($_SESSION['id_professeur'])) {
+    header('location: interface_professeur.php');
+}
 ?>
 <html lang="en">
 <head>
@@ -7,7 +18,7 @@
     <style>
         .alert {
             padding: 20px;
-            background-color: #f44336;
+            background-color: #92a6cb;
             color: white;
         }
 
@@ -83,7 +94,6 @@ if (isset($_SESSION['erreur_co'])){
 						</div>
 						<div class="card-footer py-3 border-0">
 							<div class="text-center">
-								Pas encore de compte ? <a href="inscrip.php" class="text-dark">Créer ici.</a><br>
 								Voulez-vous retourner à l'accueil ? <a href="../index.php" class="text-dark">Cliquez-ici.</a>
 							</div>
 						</div>

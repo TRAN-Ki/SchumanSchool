@@ -1,0 +1,108 @@
+body {
+    font-family: "Consolas", sans-serif;
+    transition: background-color .5s;
+    background-color: #92a6cb;
+}
+
+.mainpage {
+    text-align: center;
+
+}
+
+
+h1, .mainpage {
+    font-size: 50px ;
+}
+h2, .mainpage{
+    font-size: 35px ;
+}
+
+.dot-typing {
+    position: relative;
+    left: -9999px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #000000;
+    color: #000000;
+    box-shadow: 9984px 0 0 0 #000000, 9999px 0 0 0 #000000, 10014px 0 0 0 #000000;
+    animation: dotTyping 1.5s infinite linear;
+}
+
+@keyframes dotTyping {
+    0% {
+        box-shadow: 9984px 0 0 0 #000000, 9999px 0 0 0 #000000, 10014px 0 0 0 #000000;
+    }
+    16.667% {
+        box-shadow: 9984px -10px 0 0 #000000, 9999px 0 0 0 #000000, 10014px 0 0 0 #000000;
+    }
+    33.333% {
+        box-shadow: 9984px 0 0 0 #000000, 9999px 0 0 0 #000000, 10014px 0 0 0 #000000;
+    }
+    50% {
+        box-shadow: 9984px 0 0 0 #000000, 9999px -10px 0 0 #000000, 10014px 0 0 0 #000000;
+    }
+    66.667% {
+        box-shadow: 9984px 0 0 0 #000000, 9999px 0 0 0 #000000, 10014px 0 0 0 #000000;
+    }
+    83.333% {
+        box-shadow: 9984px 0 0 0 #000000, 9999px 0 0 0 #000000, 10014px -10px 0 0 #000000;
+    }
+    100% {
+        box-shadow: 9984px 0 0 0 #000000, 9999px 0 0 0 #000000, 10014px 0 0 0 #000000;
+    }
+}
+
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #0B5ED7;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #989898;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav p {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f6f6f6;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}

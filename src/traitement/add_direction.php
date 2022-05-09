@@ -11,4 +11,4 @@ $insert = new Direction(array(
     'TelPortable' => $_POST['tel_portable'],
 ));
 $insert->addDirection($database);
-header('Location: ../../vue/direction_vue.php');
+header('Location: ../../vue/interface_direction.php');

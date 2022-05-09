@@ -62,10 +62,12 @@ class Direction
         $res = $req->fetch();
 
         if($res){
+            $_SESSION['nom'] = $res['nom'];
+            $_SESSION['prenom'] = $res['prenom'];
             $_SESSION['email'] = $res['email'];
-            $_SESSION['id'] = $res['id_direction'];
+            $_SESSION['id_direction'] = $res['id_direction'];
 
-            header('Location: ../../vue/direction_vue.php');
+            header('Location: ../../vue/interface_direction.php');
         }
         else{
             header('Location: ../../vue/login_direction.php');

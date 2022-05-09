@@ -66,9 +66,11 @@ class Professeur
 
         if($res){
             $_SESSION['email'] = $res['email'];
-            $_SESSION['id'] = $res['id_direction'];
+            $_SESSION['nom'] = $res['nom'];
+            $_SESSION['prenom'] = $res['prenom'];
+            $_SESSION['id_professeur'] = $res['id_professeur'];
 
-            header('Location: ../../vue/professeur_vue.php');
+            header('Location: ../../vue/interface_professeur.php');
         }
         else{
             header('Location: ../../vue/login_professeur.php');

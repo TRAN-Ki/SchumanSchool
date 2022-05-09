@@ -8,5 +8,4 @@ $insert = new Professeur(array(
     'MotDePasse'=>$_POST['mot_de_passe'],
 ));
 $insert->testProfesseur($database);
-header('Location: ../../vue/interface_co.php');
 

@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <?php
 session_start();
+if (isset($_SESSION['id_etudiant'])) {
+    header('location: interface_co.php');
+}
+if (isset($_SESSION['id_direction'])) {
+    header('location: interface_direction.php');
+}
+if (isset($_SESSION['id_professeur'])) {
+    header('location: interface_professeur.php');
+}
 ?>
 <html lang="en">
 <head>
@@ -8,10 +17,10 @@ session_start();
 	<title>Connexion - SchoolNow</title>
     <style>
         body {
-             background-color: #ECB807 !important;
+             background-color: #92a6cb !important;
          }
         .text-title{
-            color: #1D809F !important;
+            color: #000000 !important;
         }
         .alert {
             padding: 20px;

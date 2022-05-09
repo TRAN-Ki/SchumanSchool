@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+<?php
+session_start();
+if (!isset($_SESSION['id_direction'])) {
+    header('location: ../../index.php');
+    exit();
+}
+?>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -31,10 +38,10 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Accueil</a></li>
             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#professeur">Professeur</a></li>
-            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">Education</a></li>
-            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#classe">Classe</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#classe">Élève</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="../src/traitement/deco.php">Se déconnecter</a></li>
         </ul>
     </div>
 </nav>
@@ -44,8 +51,7 @@
     <section class="resume-section" id="about">
         <div class="resume-section-content">
             <?php
-            session_start();
-            if (isset($_SESSION['id'])){
+            if (isset($_SESSION['id_direction'])){
                 echo "
                     <h1 class='mb-0'>
                         ".$_SESSION['prenom']." 
@@ -53,16 +59,12 @@
                     </h1>
 
                     <div class='subheading mb-5'>
-                        ".$_SESSION['cp']."·".$_SESSION['rue']."·".$_SESSION['ville']."·".$_SESSION['tel_etudiant']."·
                         <a href='mailto:name@email.com'>".$_SESSION['email']."</a>
                     </div>";
             }?>
-            <p class="lead mb-5">I am experienced in leveraging agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.</p>
             <div class="social-icons">
-                <a class="social-icon" href="#!"><i class="fab fa-linkedin-in"></i></a>
-                <a class="social-icon" href="#!"><i class="fab fa-github"></i></a>
-                <a class="social-icon" href="#!"><i class="fab fa-twitter"></i></a>
-                <a class="social-icon" href="#!"><i class="fab fa-facebook-f"></i></a>
+                <h7>GitHub - </h7>
+                <a class="social-icon" href="https://github.com/TRAN-Ki/SchumanSchool"><i class="fab fa-github"></i></a>
             </div>
         </div>
     </section>
@@ -85,8 +87,8 @@
                     <th>Prenom</th>
                     <th>Email</th>
                     <th>Telephone</th>
-                    <td>Modifier professeur</td>
-                    <td>Supprimer professeur</td>
+                    <td>Modifier un professeur</td>
+                    <td>Supprimer un professeur</td>
                 </tr>
                 </thead>
                 <tbody>
@@ -281,7 +283,56 @@
                 </form>
             </div>
         </div>
+        <br>
+        <br>
 
+        <div class="row gx-4 gx-lg-5 justify-content-center mb-5" id="devoirs">
+            <h2 class="mb-5">&nbsp &nbsp &nbsp &nbsp Ajouter une heure de cours</h2>
+            <div class="col-lg-6">
+                <form action="../src/traitement/add_bloc_heure.php" method="post">
+                    <div class="form-floating mb-3">
+                        Jour du cours :
+                        <select required data-sb-validations="required" name="jour" id="jour">
+                            <option value="Lundi">Lundi</option>
+                            <option value="Mardi">Mardi</option>
+                            <option value="Mercredi">Mercredi</option>
+                            <option value="Jeudi">Jeudi</option>
+                            <option value="Vendredi">Vendredi</option>
+                            <option value="Samedi">Samedi</option>
+                            <option value="Dimanche">Dimanche</option>
+                        </select>
+                        <div class="invalid-feedback" data-sb-feedback="jour:required">Un jour est requis</div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="heure_debut" type="text" placeholder="Heure de début (format à respecter, exemple : 9.5 = 9h30)" required data-sb-validations="required" name="heure_debut" />
+                        <label for="heure_debut">Heure de début (format à respecter, exemple : 9.5 = 9h30)</label>
+                        <div class="invalid-feedback" data-sb-feedback="prenom:required">Un prenom est requis</div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="heure_fin" type="text" placeholder="Heure de fin (format à respecter, exemple : 11.5 = 11h30)" required data-sb-validations="required" name="heure_fin" />
+                        <label for="heure_fin">Heure de fin (format à respecter, exemple : 11.5 = 11h30)</label>
+                        <div class="invalid-feedback" data-sb-feedback="heure_fin:required">Une heure defin est requis</div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="ref_classe" type="number" placeholder="ref_classe" required data-sb-validations="required" name="ref_classe" />
+                        <label for="ref_classe">Classe</label>
+                        <div class="invalid-feedback" data-sb-feedback="ref_classe:required">Une classe est requis</div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="ref_professeur" type="number" placeholder="ref_professeur" required data-sb-validations="required" name="ref_professeur" />
+                        <label for="ref_professeur">Professeur</label>
+                        <div class="invalid-feedback" data-sb-feedback="ref_professeur:required">Un professeur est requis</div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="ref_matiere" type="number" placeholder="ref_matiere" required data-sb-validations="required" name="ref_matiere" />
+                        <label for="ref_matiere">Matière</label>
+                        <div class="invalid-feedback" data-sb-feedback="ref_matiere:required">Une matière est requis</div>
+                    </div>
+                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                    <div class="d-grid"><button class="btn btn-primary btn-xl " id="submitButton" type="submit">Ajouter une heure de cours</button></div>
+                </form>
+            </div>
+        </div>
 
 
 <!-- Bootstrap core JS-->
